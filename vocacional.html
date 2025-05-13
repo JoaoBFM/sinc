@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste para Descoberta Profissional</title>
+    <link rel="stylesheet" href="./estilos/vocacional.css">
+    <script>
+        let perguntas = [
+            { texto: "Você gosta de criar projetos estruturais e organizar espaços arquitetônicos.",area: "Arquitetura" },
+            { texto: "Você tem interesse em desenho técnico e planejamento de construções.",area: "Arquitetura" },
+            { texto: "Você busca combinar estética e funcionalidade em projetos urbanos.",area: "Arquitetura" },
+
+            { texto: "Você se interessa por leis penais e defesa de acusados.",area: "Direito Criminal" },
+            { texto: "Você gosta de investigar crimes e analisar provas jurídicas.",area: "Direito Criminal" },
+            { texto: "Você acredita na importância da justiça penal e da defesa dos direitos.",area: "Direito Criminal" },
+
+            { texto: "Você tem afinidade com contratos, propriedades e relações jurídicas.",area: "Direito Civil" },
+            { texto: "Você acha interessante atuar em casos de família e sucessões legais.",area: "Direito Civil" },
+            { texto: "Você busca resolver conflitos entre indivíduos por meio da lei.",area: "Direito Civil" },
+
+            { texto: "Você se interessa por regulamentações sobre compras e contratos.",area: "Direito do Consumidor" },
+            { texto: "Você acredita na defesa dos consumidores contra práticas abusivas.",area: "Direito do Consumidor" },
+            { texto: "Você gosta de analisar normas e direitos relacionados ao comércio.",area: "Direito do Consumidor" },
+
+            { texto: "Você sente motivação para defender os direitos dos trabalhadores.",area: "Direito Trabalhista" },
+            { texto: "Você se interessa por normas e regulamentações sobre relações de trabalho.",area: "Direito Trabalhista" },
+            { texto: "Você busca resolver disputas entre empregadores e funcionários.",area: "Direito Trabalhista" },
+
+            { texto: "Você gosta de analisar leis fiscais e cálculos tributários.",area: "Direito Tributário" },
+            { texto: "Você busca entender e otimizar impostos e tributos de empresas.",area: "Direito Tributário" },
+            { texto: "Você tem afinidade com planejamento fiscal e gestão tributária.",area: "Direito Tributário" },
+
+            { texto: "Você gosta de desenvolver projetos elétricos para diversos setores.",area: "Engenharia Elétrica" },
+            { texto: "Você se interessa por sistemas elétricos inteligentes e automação.",area: "Engenharia Elétrica" },
+            { texto: "Você tem facilidade em projetar soluções para circuitos elétricos.",area: "Engenharia Elétrica" },
+
+            { texto: "Você gosta de planejar manutenção preventiva de máquinas industriais.",area: "Manutenção Industrial" },
+            { texto: "Você busca estratégias para aumentar a vida útil de equipamentos mecânicos.",area: "Manutenção Industrial" },
+            { texto: "Você se interessa por técnicas de reparo e manutenção avançadas.",area: "Manutenção Industrial" },
+
+            { texto: "Você gosta de criar estratégias para negócios e empresas.",area: "Gestão de Empresas" },
+            { texto: "Você busca liderança e gerenciamento eficiente de equipes.",area: "Gestão de Empresas" },
+            { texto: "Você tem interesse em planejamento estratégico e inovação empresarial.",area: "Gestão de Empresas" },
+
+            { texto: "Você gosta de organizar e analisar informações financeiras e contábeis.",area: "Contabilidade" },
+            { texto: "Você tem interesse em auditoria e controle fiscal para empresas.",area: "Contabilidade" },
+            { texto: "Você busca entender gestão financeira e planejamento contábil.",area: "Contabilidade" },
+
+            { texto: "Você gosta de criar interfaces visuais intuitivas e agradáveis.",area: "FrontEnd" },
+            { texto: "Você busca desenvolver sistemas interativos focados na experiência do usuário.",area: "FrontEnd" },
+            { texto: "Você tem afinidade com design responsivo e acessibilidade digital.",area: "FrontEnd" },
+
+            { texto: "Você gosta de estruturar bancos de dados e criar sistemas robustos.",area: "BackEnd" },
+            { texto: "Você busca desenvolver funcionalidades seguras e eficientes.",area: "BackEnd" },
+            { texto: "Você tem interesse em segurança da informação e proteção de dados.",area: "BackEnd" },
+
+            { texto: "Você gosta de organizar e otimizar grandes volumes de dados.",area: "Banco de Dados" },
+            { texto: "Você busca desenvolver modelos eficientes para armazenamento de informações.",area: "Banco de Dados" },
+            { texto: "Você tem afinidade com inteligência artificial aplicada à análise de dados.",area: "Banco de Dados" },
+
+            { texto: "Você gosta de criar narrativas imersivas e envolventes para jogos.",area: "Games" },
+            { texto: "Você busca desenvolver mecânicas de jogos interativas.",area: "Games" },
+            { texto: "Você tem interesse em programação gráfica e desenvolvimento visual.",area: "Games" },
+
+            { texto: "Você gosta de identificar talentos e promover o desenvolvimento de profissionais", area: "Recursos Humanos" },
+            { texto: "Você se interessa por estratégias para melhorar o ambiente de trabalho e a produtividade", area: "Recursos Humanos" },
+            { texto: "Você busca entender gestão de pessoas e resolver conflitos organizacionais", area: "Recursos Humanos" },
+
+            { texto: "Você gosta de elaborar planos alimentares para melhorar a qualidade de vida das pessoas", area: "Nutrição" },
+            { texto: "Você se interessa por estudar nutrientes e como eles impactam a saúde", area: "Nutrição" },
+            { texto: "Você busca promover hábitos alimentares saudáveis e combater doenças relacionadas à alimentação", area: "Nutrição" },
+
+            { texto: "Você gosta de desenvolver soluções para a preservação do meio ambiente", area: "Gestão Ambiental" },
+            { texto: "Você se interessa por projetos sustentáveis e práticas ecológicas", area: "Gestão Ambiental" },
+            { texto: "Você busca entender e aplicar políticas ambientais para minimizar impactos ecológicos", area: "Gestão Ambiental" },
+
+            { texto: "Você gosta de garantir a qualidade e a segurança dos alimentos consumidos pela população", area: "Segurança Alimentar" },
+            { texto: "Você se interessa por normas sanitárias e controle de qualidade na produção de alimentos", area: "Segurança Alimentar" },
+            { texto: "Você busca desenvolver estratégias para combater a fome e promover acesso a alimentos seguros", area: "Segurança Alimentar" }
+        ];
+
+        perguntas = embaralharArray(perguntas);
+
+        let indiceAtual = 0;
+        let pontuacao = {};
+        let respostaSelecionada = false; // Variável para controlar se uma resposta foi selecionada
+
+        function embaralharArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function atualizarProgresso() {
+            let progresso = Math.floor((indiceAtual / perguntas.length) * 100);
+            document.getElementById("barraProgresso").style.width = progresso + "%";
+            document.getElementById("progressoTexto").innerText = progresso + "% concluído";
+        }
+
+        function mostrarPergunta() {
+            respostaSelecionada = false; // Resetar a flag ao mostrar uma nova pergunta
+            document.getElementById("botaoAvancar").style.display = "none"; // Oculta o botão "Avançar" ao exibir a pergunta
+            if (indiceAtual < perguntas.length) {
+                document.getElementById("pergunta").innerText = perguntas[indiceAtual].texto;
+                document.getElementById("opcoes").innerHTML = `
+                    <button class="botao-resposta" onclick="registrarResposta(5, this)" data-valor-anterior="0">Concordo totalmente</button>
+                    <button class="botao-resposta" onclick="registrarResposta(4, this)" data-valor-anterior="0">Concordo</button>
+                    <button class="botao-resposta" onclick="registrarResposta(3, this)" data-valor-anterior="0">Neutro</button>
+                    <button class="botao-resposta" onclick="registrarResposta(2, this)" data-valor-anterior="0">Discordo</button>
+                    <button class="botao-resposta" onclick="registrarResposta(1, this)" data-valor-anterior="0">Discordo totalmente</button>
+                `;
+                // Remove a classe de seleção de todos os botões ao mostrar uma nova pergunta
+                let botoes = document.querySelectorAll(".botao-resposta");
+                botoes.forEach(btn => btn.classList.remove("botao-selecionado"));
+            } else {
+                calcularResultado();
+            }
+        }
+
+        function registrarResposta(valor, botao) {
+            let area = perguntas[indiceAtual].area;
+
+            // Remove a seleção anterior
+            let botoes = document.querySelectorAll(".botao-resposta");
+            botoes.forEach(btn => btn.classList.remove("botao-selecionado"));
+
+            // Adiciona a classe para destacar o botão selecionado
+            botao.classList.add("botao-selecionado");
+
+            if (!pontuacao[area]) {
+                pontuacao[area] = 0;
+            }
+
+            // Recalcula a pontuação subtraindo a resposta anterior (se houver)
+            // e adicionando a nova resposta
+            let respostaAnterior = parseInt(botao.dataset.valorAnterior || 0);
+            pontuacao[area] -= respostaAnterior;
+            pontuacao[area] += parseInt(valor);
+
+            // Armazena o valor atual como o valor anterior para futuras mudanças
+            botao.dataset.valorAnterior = parseInt(valor);
+
+            document.getElementById("botaoAvancar").style.display = "block"; // Mostra o botão de avançar
+            respostaSelecionada = true; // Indica que uma resposta foi selecionada
+        }
+
+        function avancarPergunta() {
+            if (respostaSelecionada) {
+                indiceAtual++;
+                atualizarProgresso(); // Atualiza barra de progresso
+                mostrarPergunta(); // Exibe a próxima pergunta
+            } else {
+                alert("Por favor, selecione uma resposta antes de avançar.");
+            }
+        }
+
+        function calcularResultado() {
+            let ordenado = Object.entries(pontuacao)
+                .sort((a, b) => b[1] - a[1])
+                .map(([area]) => area);
+
+            let resultadoTexto = `Sua profissão ideal é ${ordenado[0]}!
+                Porém, você ainda tem ${ordenado[1]} como segunda opção e ${ordenado[2]} como terceira opção.`;
+
+            document.getElementById("resultadoTitulo").style.display = "block";
+            document.getElementById("resultado").innerHTML = resultadoTexto;
+            document.getElementById("pergunta").style.display = "none"; // Oculta a última pergunta
+            document.getElementById("opcoes").style.display = "none";
+            document.getElementById("botaoAvancar").style.display = "none";
+            document.getElementById("botoesFinal").style.display = "block"; // Mostra os botões finais
+        }
+
+        function refazerTeste() {
+            location.reload(); // Recarrega a página para reiniciar o teste
+        }
+
+        function concluirTeste() {
+            window.location.href = "index.html"; // Direciona para outra página
+        }
+
+        window.onload = mostrarPergunta;
+    </script>
+</head>
+<body>
+    <h1>Teste para Descoberta Profissional</h1>
+    <div class="container">
+        <div id="barraProgressoContainer">
+            <div id="barraProgresso"></div>
+            <p id="progressoTexto">0% concluído</p>
+        </div>
+        <p id="pergunta">Você se interessa por sistemas elétricos inteligentes e automação.</p>
+        <div id="opcoes">
+            <button class="botao-resposta" onclick="registrarResposta(5, this)" data-valor-anterior="0">Concordo totalmente</button>
+            <button class="botao-resposta" onclick="registrarResposta(4, this)" data-valor-anterior="0">Concordo</button>
+            <button class="botao-resposta" onclick="registrarResposta(3, this)" data-valor-anterior="0">Neutro</button>
+            <button class="botao-resposta" onclick="registrarResposta(2, this)" data-valor-anterior="0">Discordo</button>
+            <button class="botao-resposta" onclick="registrarResposta(1, this)" data-valor-anterior="0">Discordo totalmente</button>
+        </div>
+        <button id="botaoAvancar" onclick="avancarPergunta()" style="display:none;">Avançar</button>
+        <div id="resultadoTitulo" style="display:none;"><h2>Resultado:</h2></div>
+        <div id="resultado"></div>
+        <div id="botoesFinal" style="display:none;">
+            <button onclick="refazerTeste()">Refazer Teste</button>
+            <button onclick="concluirTeste()">Concluir</button>
+        </div>
+    </div>
+</body>
+</html>

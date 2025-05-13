@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chatbot IA - Cursos</title>
+  <style>
+    #chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 320px;
+      max-height: 400px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      z-index: 9999;
+    }
+
+    #chatbot-header {
+      background-color: #4f46e5;
+      color: #fff;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #chatbot-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    .message {
+      margin-bottom: 10px;
+    }
+
+    .user {
+      text-align: right;
+      color: #333;
+    }
+
+    .bot {
+      text-align: left;
+      color: #4f46e5;
+    }
+
+    #chatbot-input-area {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+
+    #chatbot-input {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      outline: none;
+    }
+
+    #chatbot-send {
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    #chatbot-send:hover {
+      background-color: #4338ca;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Conteúdo do seu site aqui -->
+
+  <div id="chatbot-container">
+    <div id="chatbot-header">Chat Cursos</div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input-area">
+      <input type="text" id="chatbot-input" placeholder="Digite sua dúvida..." />
+      <button id="chatbot-send">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    const messages = document.getElementById("chatbot-messages");
+    const input = document.getElementById("chatbot-input");
+    const sendBtn = document.getElementById("chatbot-send");
+  
+    function addMessage(text, sender) {
+      const div = document.createElement("div");
+      div.className = "message " + sender;
+      div.innerText = text;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+  
+    async function sendToServer(question) {
+      try {
+        const response = await fetch("http://localhost:3000/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ question })
+        });
+  
+        const data = await response.json();
+        if (data.reply) {
+          addMessage(data.reply, "bot");
+        } else {
+          addMessage("Desculpe, não consegui responder agora.", "bot");
+        }
+      } catch (error) {
+        console.error("Erro ao se comunicar com o servidor:", error);
+        addMessage("Erro ao se conectar com o servidor.", "bot");
+      }
+    }
+  
+    sendBtn.addEventListener("click", () => {
+      const text = input.value.trim();
+      if (text !== "") {
+        addMessage(text, "user");
+        sendToServer(text);
+        input.value = "";
+      }
+    });
+  
+    input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        sendBtn.click();
+      }
+    });
+  </script>  
+
+</body>
+</html>
